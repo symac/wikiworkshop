@@ -28,6 +28,7 @@
     $( document ).ready(function() {
       $(".addKeyword").click(
         function() {
+            $("#loader").show();
           var keywordKey = $(this).attr("data-key");
           var keywordOk = $(this).find(".label_ok").html();
           var keywordKo = $(this).find(".label_ko").html();
@@ -38,8 +39,10 @@
               var title = data["query"]["search"][id]["title"];
               var snippet = data["query"]["search"][id]["snippet"];
 
-              var resultLine = "<tr><td><a href='http://fr.wikipedia.org/wiki/" + encodeURIComponent(title) + "'>" + title + "</a></td><td>" + keywordKo + "</td><td>" + keywordOk + "</td><td>" + snippet + "</td><td><a class='btnSuppr' href='#'>&#10006;</a></td></tr>";
+              var resultLine = "<tr><td><a href=\"http://fr.wikipedia.org/wiki/" + encodeURIComponent(title) + "\">" + title + "</a></td><td>" + keywordKo + "</td><td>" + keywordOk + "</td><td>" + snippet + "</td><td><a class='btnSuppr' href='#'>&#10006;</a></td></tr>";
               $("#articlesList").append(resultLine);
+              $("#loader").hide();
+
               updateNbExports();
               $(".btnSuppr").on("click", function() {
                   $(this).parent().parent().remove();
@@ -82,6 +85,63 @@
       color:red;
       font-size: 2em;
     }
+
+    #loader {
+        display: inline-block;
+        position: relative;
+        width: 64px;
+        height: 64px;
+        display:none;
+    }
+    #loader div {
+        position: absolute;
+        top: 27px;
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        background: #245;
+        animation-timing-function: cubic-bezier(0, 1, 1, 0);
+    }
+    #loader div:nth-child(1) {
+        left: 6px;
+        animation: lds-ellipsis1 0.6s infinite;
+    }
+    #loader div:nth-child(2) {
+        left: 6px;
+        animation: lds-ellipsis2 0.6s infinite;
+    }
+    #loader div:nth-child(3) {
+        left: 26px;
+        animation: lds-ellipsis2 0.6s infinite;
+    }
+    #loader div:nth-child(4) {
+        left: 45px;
+        animation: lds-ellipsis3 0.6s infinite;
+    }
+    @keyframes lds-ellipsis1 {
+        0% {
+            transform: scale(0);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+    @keyframes lds-ellipsis3 {
+        0% {
+            transform: scale(1);
+        }
+        100% {
+            transform: scale(0);
+        }
+    }
+    @keyframes lds-ellipsis2 {
+        0% {
+            transform: translate(0, 0);
+        }
+        100% {
+            transform: translate(19px, 0);
+        }
+    }
   </style>
 
   <!-- Favicon
@@ -111,7 +171,8 @@
         </table>
 
         <p></p>
-
+          <div id="loader"><div></div><div></div><div></div><div></div></div>
+          <br/>
         <?php
           foreach ($keywords as $indice => $values) {
             print "<span class='button addKeyword' data-key='".$indice."'><span class='hidden label_ko'>".$values["ko"]."</span><span class='hidden label_ok'>".$values["ok"]."</span>".$values["ko"]." &rarr; ".$values["ok"]."</span>";
