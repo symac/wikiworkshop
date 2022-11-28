@@ -35,13 +35,14 @@
 
 
           $.getJSON('https://fr.wikipedia.org/w/api.php?action=query&list=search&srsearch=%22' + encodeURIComponent(keywordKo) + '%22&srnamespace=0&format=json&srlimit=50&callback=?', function(data) {
+            var count = 0;
             for (var id in data["query"]["search"]) {
+              count++;
               var title = data["query"]["search"][id]["title"];
               var snippet = data["query"]["search"][id]["snippet"];
 
               var resultLine = "<tr><td><a href=\"http://fr.wikipedia.org/wiki/" + encodeURIComponent(title) + "\">" + title + "</a></td><td>" + keywordKo + "</td><td>" + keywordOk + "</td><td>" + snippet + "</td><td><a class='btnSuppr' href='#'>&#10006;</a></td></tr>";
               $("#articlesList").append(resultLine);
-              $("#loader").hide();
 
               updateNbExports();
               $(".btnSuppr").on("click", function() {
@@ -50,8 +51,8 @@
                   return false;
                 }
               );
-
             }
+            $("#loader").hide();            
           });
         }
       );
