@@ -16,7 +16,8 @@ $mpdf->SetDisplayMode('fullpage');
 
 $mpdf->list_indent_first_level = 0; // 1 or 0 - whether to indent the first level of a list
 
-$table = '<table border="1" cellpadding=1em cellspacing=0 class="bpmTopnTail tallcells" style="width:100%"><tbody><tr>';
+$table = '<table border="1" cellpadding=1em cellspacing=0 class="bpmTopnTail tallcells" style="width:100%"><tbody>';
+$table .= '<tr style="height:2.5em">';
 
 $data = $_POST["data"];
 $data = html_entity_decode($data);
@@ -32,9 +33,9 @@ foreach ($data as $row) {
 $count = 0;
 foreach ($errors as $error) {
     if (($count % 2) == 0) {
-        $table .= "</tr><tr>";
+        $table .= "</tr><tr style='height:5em'>";
     }
-    $table .= "<td style='width:50%; text-align:center'><strong style='font-size:1.5em'>" . $error[0] . "</strong><br/>" . $error[1] . " &rarr; " . $error[2] . "</td>";
+    $table .= "<td style='height:3cm; width:50%; text-align:center'><strong style='font-size:1.2em'>" . $error[0] . "</strong><br/>" . $error[1] . " &rarr; " . $error[2] . "</td>";
     $count++;
 }
 
