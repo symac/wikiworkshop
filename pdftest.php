@@ -34,7 +34,7 @@ foreach ($errors as $error) {
     if (($count % 2) == 0) {
         $table .= "</tr><tr>";
     }
-    $table .= "<td style='width:50%; text-align:center'><strong style='font-size:2em'>" . $error[0] . "</strong><br/>" . $error[1] . " &rarr; " . $error[2] . "</td>";
+    $table .= "<td style='width:50%; text-align:center'><strong style='font-size:1.5em'>" . $error[0] . "</strong><br/>" . $error[1] . " &rarr; " . $error[2] . "</td>";
     $count++;
 }
 
