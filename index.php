@@ -85,17 +85,21 @@
                             var title = data["query"]["search"][id]["title"];
                             var snippet = data["query"]["search"][id]["snippet"];
 
-                            var resultLine = "<tr><td><a href=\"http://fr.wikipedia.org/wiki/" + encodeURIComponent(title) + "\">" + title + "</a></td><td>" + keywordKo + "</td><td>" + keywordOk + "</td><td>" + snippet + "</td><td><a class='btnSuppr' href='#'>&#10006;</a></td></tr>";
-                            $("#articlesList").append(resultLine);
-
-                            updateNbExports();
-                            $(".btnSuppr").on("click", function () {
-                                    $(this).parent().parent().remove();
-                                    updateNbExports();
-                                    return false;
-                                }
-                            );
+                            // Does snippet contains the string "searchmatch"
+                            var regex = /searchmatch/g;
+                            var match = regex.exec(snippet);
+                            if (match != null) {
+                                var resultLine = "<tr><td><a href=\"http://fr.wikipedia.org/wiki/" + encodeURIComponent(title) + "\">" + title + "</a></td><td>" + keywordKo + "</td><td>" + keywordOk + "</td><td>" + snippet + "</td><td><a class='btnSuppr' href='#'>&#10006;</a></td></tr>";
+                                $("#articlesList").append(resultLine);
+                                $(".btnSuppr").on("click", function () {
+                                        $(this).parent().parent().remove();
+                                        updateNbExports();
+                                        return false;
+                                    }
+                                );
+                            }
                         }
+                        updateNbExports();
                         $("#loader").hide();
                     });
                 }
