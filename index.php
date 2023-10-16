@@ -28,13 +28,14 @@
         $(document).ready(function () {
             $("#export-button").click(
                 function() {
-                    if ($('#articlesList tr').length == 0) {
+                    var articleList = $('#articlesList tr');
+                    if (articleList.length == 0) {
                         alert("Veuillez sélectionner au moins une erreur");
                         return false;
                     }
 
                     var data = [];
-                    $('#articlesList tr').each(function() {
+                    articleList.each(function() {
                         var row = [];
                         $(this).find('td').each(function() {
                             row.push($(this).text());
@@ -42,11 +43,8 @@
                         data.push(row);
                     });
 
-                    // Post the data to pdftest.php
-
-
                     var req = new XMLHttpRequest();
-                    req.open("POST", "pdftest.php", true);
+                    req.open("POST", "exportpdf.php", true);
                     req.responseType = "blob";
                     req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                     req.onreadystatechange = function ()
@@ -58,7 +56,7 @@
                             var link = document.createElement('a');
                             link.setAttribute("type", "hidden"); // make it hidden if needed
                             link.href = window.URL.createObjectURL(blob);
-                            link.download = "test.pdf";
+                            link.download = "erreurs.pdf";
                             document.body.appendChild(link);
                             link.click();
                             link.remove();
@@ -84,12 +82,13 @@
                             count++;
                             var title = data["query"]["search"][id]["title"];
                             var snippet = data["query"]["search"][id]["snippet"];
+                            var size = data["query"]["search"][id]["size"];
 
                             // Does snippet contains the string "searchmatch"
                             var regex = /searchmatch/g;
                             var match = regex.exec(snippet);
                             if (match != null) {
-                                var resultLine = "<tr><td><a href=\"http://fr.wikipedia.org/wiki/" + encodeURIComponent(title) + "\">" + title + "</a></td><td>" + keywordKo + "</td><td>" + keywordOk + "</td><td>" + snippet + "</td><td><a class='btnSuppr' href='#'>&#10006;</a></td></tr>";
+                                var resultLine = "<tr><td><a href=\"http://fr.wikipedia.org/wiki/" + encodeURIComponent(title) + "\">" + title + "</a><br/><small> " + size + " caractères</small></td><td>" + keywordKo + "</td><td>" + keywordOk + "</td><td>" + snippet + "</td><td><a class='btnSuppr' href='#'>&#10006;</a></td></tr>";
                                 $("#articlesList").append(resultLine);
                                 $(".btnSuppr").on("click", function () {
                                         $(this).parent().parent().remove();
@@ -116,7 +115,7 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/skeleton.css">
 
-    <style type='text/css'>
+    <style>
         .button {
             margin-right: 10px;
         }
@@ -136,7 +135,6 @@
         }
 
         #loader {
-            display: inline-block;
             position: relative;
             width: 64px;
             height: 64px;
@@ -198,12 +196,6 @@
             100% {
                 transform: translate(19px, 0);
             }
-        }
-
-        .disabled {
-            background:#ccc;
-            border-color: #ccc;
-            text-shadow:none;
         }
     </style>
 

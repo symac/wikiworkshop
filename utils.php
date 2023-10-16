@@ -1,6 +1,5 @@
 <?php
 	session_start();
-	ini_set("display_errors", 1);	
 	function loadKeywords() {		
 		$keywords = json_decode(file_get_contents("config.json"), true);
 		return $keywords;
