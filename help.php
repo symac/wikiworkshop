@@ -39,6 +39,7 @@
                 <li>Ne générez pas la liste trop tôt avant l'animation pour limiter le nombre de pages corrigées dans l'intervalle</li>
                 <li>Avant de lancer la personne sur la modification, assurez vous que ce soit une modification simple (i.e. pas dans une infobox ou une note de bas de page)</li>
                 <li>privilégiez les pages de longueur raisonnable (la longueur est indiquée dans la première colonne sous le nom de la page). En effet, plus la page est longue plus une personne qui n'est pas 100% à l'aise avec l'informatique aura du mal à trouver l'emplacement de l'erreur sans avoir le réflexe de faire un rechercher.</li>
+                <li>Assurez-vous que l'erreur en est bien une. Si par exemple "parmis" est une faute courante en français à la place de "parmi", Parmis est aussi un prénom utilisé à juste titre dans certains article wikipédia.</li>
             </ul>
 
             <p>Pour toute remarque ou suggestion d'amélioration sur l'outil, n'hésitez pas à <a href="http://www.geobib.fr/contact">me contacter</a>.</p>
