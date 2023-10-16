@@ -42,6 +42,7 @@
                 <li>Assurez-vous que l'erreur en est bien une. Si par exemple "parmis" est une faute courante en français à la place de "parmi", Parmis est aussi un prénom utilisé à juste titre dans certains article wikipédia.</li>
             </ul>
 
+            <p>Cette interface est disponible sous licence libre GPL et le code source est accessible <a href="https://github.com/symac/wikiworkshop">sur github</a>.</p>
             <p>Pour toute remarque ou suggestion d'amélioration sur l'outil, n'hésitez pas à <a href="http://www.geobib.fr/contact">me contacter</a>.</p>
         </div>
     </div>
