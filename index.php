@@ -13,10 +13,6 @@
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- FONT
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-
     <!-- SCRIPTS
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <script
@@ -29,7 +25,7 @@
             $("#export-button").click(
                 function() {
                     var articleList = $('#articlesList tr');
-                    if (articleList.length == 0) {
+                    if (articleList.length === 0) {
                         alert("Veuillez sélectionner au moins une erreur");
                         return false;
                     }
@@ -70,6 +66,7 @@
 
             $(".addKeyword").click(
                 function () {
+                    $("#prestartMessage").hide();
                     $("#loader").show();
                     var keywordKey = $(this).attr("data-key");
                     var keywordOk = $(this).find(".label_ok").html();
@@ -114,95 +111,8 @@
     –––––––––––––––––––––––––––––––––––––––––––––––––– -->
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/skeleton.css">
-
-    <style>
-        .button {
-            margin-right: 10px;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .searchmatch {
-            font-weight: bold;
-            font-style: italic;
-        }
-
-        .btnSuppr {
-            color: red;
-            font-size: 2em;
-        }
-
-        #loader {
-            position: relative;
-            width: 64px;
-            height: 64px;
-            display: none;
-        }
-
-        #loader div {
-            position: absolute;
-            top: 27px;
-            width: 11px;
-            height: 11px;
-            border-radius: 50%;
-            background: #245;
-            animation-timing-function: cubic-bezier(0, 1, 1, 0);
-        }
-
-        #loader div:nth-child(1) {
-            left: 6px;
-            animation: lds-ellipsis1 0.6s infinite;
-        }
-
-        #loader div:nth-child(2) {
-            left: 6px;
-            animation: lds-ellipsis2 0.6s infinite;
-        }
-
-        #loader div:nth-child(3) {
-            left: 26px;
-            animation: lds-ellipsis2 0.6s infinite;
-        }
-
-        #loader div:nth-child(4) {
-            left: 45px;
-            animation: lds-ellipsis3 0.6s infinite;
-        }
-
-        @keyframes lds-ellipsis1 {
-            0% {
-                transform: scale(0);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        @keyframes lds-ellipsis3 {
-            0% {
-                transform: scale(1);
-            }
-            100% {
-                transform: scale(0);
-            }
-        }
-
-        @keyframes lds-ellipsis2 {
-            0% {
-                transform: translate(0, 0);
-            }
-            100% {
-                transform: translate(19px, 0);
-            }
-        }
-    </style>
-
-    <!-- Favicon
-    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-    <link rel="icon" type="image/png" href="images/favicon.png">
-
+    <link rel="stylesheet" href="css/style.css">
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
 </head>
 <body>
 
@@ -216,7 +126,7 @@ $keywords = loadKeywords();
 <div class="container">
     <div class="row">
         <div class="">
-            <h1>Génération de liste pour atelier</h1>
+            <h1>Préparation animation Wikipédia (<a href="help.php">conseils</a>)</h1>
             <table class="u-full-width">
                 <thead>
                 <tr>
@@ -230,6 +140,9 @@ $keywords = loadKeywords();
                 <tbody id='articlesList'>
                 </tbody>
             </table>
+            <div id="prestartMessage">
+                &rarr; Commencez par choisir une des erreurs courantes listée ci-dessous.
+            </div>
 
             <p></p>
             <div id="loader">
