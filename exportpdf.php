@@ -24,6 +24,7 @@ $data = html_entity_decode($data);
 $data = json_decode($data, true);
 
 $errors = [];
+shuffle($data);
 foreach ($data as $row) {
     $errors[] = [
         $row[0], $row[1], $row[2]
