@@ -33,8 +33,16 @@
                     var data = [];
                     articleList.each(function() {
                         var row = [];
+                        var counter = 0;
                         $(this).find('td').each(function() {
-                            row.push($(this).text());
+                            if (counter === 0) {
+                                // Titre (sans taille)
+                                row.push($(this).find('a').text());
+                            } else if (counter <= 2) {
+                                // Erreur et Correction
+                                row.push($(this).text());
+                            }
+                            counter++;
                         });
                         data.push(row);
                     });
